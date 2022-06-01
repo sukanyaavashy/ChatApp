@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View ,TouchableOpacity} from 'react-native';
-import { CommonActions, NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -13,21 +13,24 @@ const Stack = createNativeStackNavigator();
 
 
 
-export default function App(navigation) {
+export default function App() {
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
       <Stack.Screen options={{ headerShown: false}} name="Login" component={LoginScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen options={{ headerLeft: (props) => (
-      <HeaderBackButton
-      {...props}
-        style={styles.custom}
-        onPress={() => navigation.goBack()
-
-        }
-      />
-    ),}} name="Chat" component={ChatScreen} />
+        <Stack.Screen name="Chat" component={ChatScreen} options={{
+    headerLeft: (props) => (
+      <TouchableOpacity onPress={() => {navigation.navigate("HomeScreen")}}>
+        <HeaderBackButton
+          {...props}
+          style={styles.custom}
+        />
+      </TouchableOpacity>
+    ),
+  }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
