@@ -1,28 +1,29 @@
-import { useNavigation } from '@react-navigation/core'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View ,FlatList,Button,Image,TouchableHighlight} from 'react-native'
 import auth from '@react-native-firebase/auth';
 
-
-
 const data = [
-  { id: '1', name: 'user-1',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" },
-  { id: '2', name: 'user-2',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" },
-  { id: '3', name: 'user-3',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" }
+  { id: '1', name: 'user1',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" },
+  { id: '2', name: 'user2',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" },
+  { id: '3', name: 'user3',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" }
+  ,{ id: '4', name: 'user4',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" },
+  { id: '5', name: 'user5',url:"https://thumbs.dreamstime.com/b/user-profile-icon-creative-trendy-colorful-round-button-illustration-isolated-156511788.jpg" },
+
+
 ];
 
 
 
-const HomeScreen = () => {
-  const navigation = useNavigation()
+const HomeScreen = ({navigation}) => {
+
 
   const handleSignOut = () => {
     auth()
       .signOut()
-      .then(() => {
-        navigation.replace("Login")
-      })
-      .catch(error => alert(error.message))
+      // .then(() => {
+      //   navigation.navigate("Login")
+      // })
+      // .catch(error => alert(error.message))
   }
 
   return (
@@ -32,7 +33,7 @@ const HomeScreen = () => {
         data={data}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
-          <TouchableHighlight onPress={() => navigation.replace('Chat')}>
+          <TouchableHighlight onPress={() => navigation.navigate('Chat')}>
             <View style={styles.listItem}>
               <Image style={styles.logo} source={{uri:item.url}}/>
               <Text style={styles.listItemText}>{item.name}</Text>
@@ -88,8 +89,7 @@ const styles = StyleSheet.create({
   logo: {
     width: 66,
     height: 58,
-    margin:10,
-
+    marginRight:60,
   },
   text: {
     fontSize: 20,
@@ -105,8 +105,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
 
     width: '100%',
-justifyContent: 'center',
-alignItems: 'center'
+    justifyContent: 'center',
+    alignItems: 'center',
+
 
 
   },

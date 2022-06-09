@@ -1,9 +1,10 @@
-import { StyleSheet,Text} from 'react-native'
+import { LogBox} from 'react-native'
 import React,{useState,useCallback} from 'react'
 import { GiftedChat } from 'react-native-gifted-chat';
 
 
 const ChatScreen = () => {
+
     const [messages, setMessages] = useState([
       {
         _id: 1,
@@ -28,6 +29,7 @@ const ChatScreen = () => {
     );
   };
 
+LogBox.ignoreLogs(["EventEmitter.removeListener"]);
+
 export default ChatScreen
 
-const styles = StyleSheet.create({})
